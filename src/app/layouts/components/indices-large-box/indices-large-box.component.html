@@ -1,0 +1,15 @@
+<div class="flex flex-col w-full gap-3 p-4 ">
+    <p class="uppercase font-semibold text-gray-600">{{indicesName}}</p>
+    <div class="flex flex-row gap-2 justify-between">
+        <div class="flex flex-col gap-3">
+            <p class="font-bold  text-gray-900 text-2xl">{{data}}</p>
+            <div class="text-[12px] font-bold flex flex-row p-1 w-[80px] justify-center items-center rounded-full gap-2" [ngClass]="changes < 0 ? 'bg-[#fef3f2] text-[#b42318]': 'bg-[#ecfdf3] text-[#027a48]'">
+                <img src="{{changes > 0 ? 'images/direction-up.svg' : 'images/direction-down.svg'}}" [ngClass]="changes < 0 ?  'rotate-90' : '-rotate-90'"/>
+                <p>{{changes}}%</p>
+            </div>
+        </div>
+        <div class="h-[350px] w-[700px]">
+            <canvas [id]="indicesName"></canvas>
+        </div>
+    </div>
+</div>
