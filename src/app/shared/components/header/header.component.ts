@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { StocksService } from '../../../core/service/stocks.service';
+import { StocksService } from '../../../features/main-section/services/stocks.service';
 
 @Component({
   selector: 'app-header',

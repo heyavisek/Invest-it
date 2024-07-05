@@ -1,39 +1,12 @@
 import { Injectable } from '@angular/core';
+import { indicesList } from '../../../shared/data/indices.data';
+import { Indices } from '../../../shared/models/indices.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class IndicesService {
-
-  constructor() { }
-
-  indicesList = [
-    {
-      indicesName : 'nifty',
-      changes : 0.66,
-      data : 17070.50
-    },
-    {
-      indicesName : 'bank nifty',
-      changes : -0.66,
-      data : 17070.50
-    },
-    {
-      indicesName : 'sensex',
-      changes : 0.66,
-      data : 17070.50
-    },
-    {
-      indicesName : 'nifty50',
-      changes : 0.66,
-      data : 17070.50
-    },
-    {
-      indicesName : 'Bank50',
-      changes : 1.66,
-      data : 54034.50
-    }
-  ]
+  indicesList: Indices[] = indicesList
 
   getIndicesList() {
     return this.indicesList

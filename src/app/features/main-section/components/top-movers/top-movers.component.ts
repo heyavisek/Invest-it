@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnChanges, OnInit, SimpleChange, SimpleChanges } from '@angular/core';
-import { SelectorButtonComponent } from '../../../shared/components/selector-button/selector-button.component';
 import { CommonModule } from '@angular/common';
-import { StocksService } from '../../../core/service/stocks.service';
+import { SelectorButtonComponent } from '../selector-button/selector-button.component';
+import { StocksService } from '../../services/stocks.service';
 
 @Component({
   selector: 'app-top-movers',

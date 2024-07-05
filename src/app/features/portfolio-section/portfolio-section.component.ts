@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Chart} from 'chart.js/auto'
-import { IndicesService } from '../../core/service/indices.service';
+import { IndicesService } from '../main-section/services/indices.service';
 
 @Component({
   selector: 'app-portfolio-section',
@@ -10,7 +10,7 @@ import { IndicesService } from '../../core/service/indices.service';
   templateUrl: './portfolio-section.component.html',
   styleUrl: './portfolio-section.component.scss'
 })
-export class PortfolioComponent implements OnInit {
+export class PortfolioSectionComponent implements OnInit {
   public chart: any;
   indicesData : number[] = []
   constructor(private indicesService : IndicesService){}

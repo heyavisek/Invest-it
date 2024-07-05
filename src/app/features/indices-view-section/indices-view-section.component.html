@@ -1,5 +1,5 @@
 <section class="flex flex-col p-4 gap-3">
     <div *ngFor="let item of indicesAllData" [ngClass]="'bg-white  border-gray-300 rounded-lg border-solid border-[1px]'">
-        <app-indices-large-box [indicesName]="item.indicesName" [changes]="item.changes" [data]="item.data" borderColor="red" ></app-indices-large-box>
+        <app-indices-large-box [indicesName]="item.name" [changes]="item.changes" [data]="item.currentValue" borderColor="red" ></app-indices-large-box>
     </div>
 </section>

@@ -3,7 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SideSectionComponent } from './shared/components/side-section/side-section.component';
-import { MainSectionComponent } from './layouts/main-section/main-section.component';
+import { MainSectionComponent } from './features/main-section/main-section.component';
 
 @Component({
   selector: 'app-root',

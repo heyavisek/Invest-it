@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, Input, OnInit } from '@angular/core';
-import { IndicesService } from '../../../core/service/indices.service';
 import Chart from 'chart.js/auto';
 import { CommonModule } from '@angular/common';
+import { IndicesService } from '../../../main-section/services/indices.service';
 
 @Component({
   selector: 'app-indices-large-box',
