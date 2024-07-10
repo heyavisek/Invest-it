@@ -1,42 +1,53 @@
-<style>
-</style>
+<style></style>
 
-<nav class="flex flex-row relative h-[80px]  justify-between pl-10 pr-10 shadow-md items-center bg-white text-black">
-    <div class="relative">
-        <form>
-            <input
-                class="bg-gray-100 placeholder-gray-500 font-[400] outline-none p-2 pl-10 rounded-lg w-[386px] h-[45px]"
-                type="text"
-                placeholder="Search for stock & more"
-                [(ngModel)] = 'inputData'
-                (input)="onSearchTextChange()"
-                [ngModelOptions]="{standalone: true}"
-                />
-            <img
-                class="absolute transform left-3 top-1/2 -translate-y-1/2 h-[20px] w-[20px]"
-                src="images/search-icon.svg"
-                alt="search icon"/>
-        </form>
-        <div class="absolute w-full flex flex-col gap-2 bg-white z-10 border-solid border-gray-300 border-[1px] p-2 rounded-md pb-0 text-[12px] font-semibold text-gray-600" *ngIf="searchResult.length > 0">
-            <div *ngFor="let item of searchResult" class="w-full h-[45px] border-solid border-b-[1px] border-gray-300 p-2 grow">
-                <p>{{item.scriptName}}</p>
-            </div>
-        </div>
+<nav
+  class="flex flex-row relative h-[80px] justify-between pl-10 pr-10 shadow-md items-center bg-white text-black"
+>
+  <div class="relative">
+    <form>
+      <input
+        class="bg-gray-100 placeholder-gray-500 font-[400] outline-none p-2 pl-10 rounded-lg w-[386px] h-[45px]"
+        type="text"
+        placeholder="Search for stock & more"
+        [(ngModel)]="inputData"
+        (input)="onSearchTextChange()"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <img
+        class="absolute transform left-3 top-1/2 -translate-y-1/2 h-[20px] w-[20px]"
+        src="images/search-icon.svg"
+        alt="search icon"
+      />
+    </form>
+    <div
+      class="absolute w-full flex flex-col gap-2 bg-white z-10 border-solid border-gray-300 border-[1px] p-2 rounded-md pb-0 text-[12px] font-semibold text-gray-600"
+      *ngIf="inputData.length > 0"
+    >
+      <div
+        *ngFor="let item of searchResult"
+        class="flex flex-row justify-between w-full h-[45px] border-solid border-b-[1px] border-gray-300 p-2 grow"
+      >
+        <p>{{item["1. symbol"] }}</p>
+        <p>{{item["2. name"] }}</p>
+      </div>
     </div>
-    
-    <div class="flex flex-row gap-6">
-        <img
-            class="rounded-full bg-gray-100 p-2 h-[45px] w-[45px] cursor-pointer"
-            src="images/bell-icon.svg"
-            alt="user icon"/>
-        <img
-            class="rounded-full bg-gray-100 h-[45px] w-[45px] cursor-pointer"
-            src="images/bell-icon.svg"
-            alt="userIcon"/>
+  </div>
 
-        <div class="flex flex-col text-[14px] gap-1 cursor-pointer">
-            <p class="font-semibold">Anna</p>
-            <p class="text-gray-500">anna&#64;tandemloop.in</p>
-        </div>
+  <div class="flex flex-row gap-6">
+    <img
+      class="rounded-full bg-gray-100 p-2 h-[45px] w-[45px] cursor-pointer"
+      src="images/bell-icon.svg"
+      alt="user icon"
+    />
+    <img
+      class="rounded-full bg-gray-100 h-[45px] w-[45px] cursor-pointer"
+      src="images/bell-icon.svg"
+      alt="userIcon"
+    />
+
+    <div class="flex flex-col text-[14px] gap-1 cursor-pointer">
+      <p class="font-semibold">Anna</p>
+      <p class="text-gray-500">anna&#64;tandemloop.in</p>
     </div>
+  </div>
 </nav>

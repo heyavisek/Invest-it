@@ -3,12 +3,12 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from './shared/components/header/header.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { SideSectionComponent } from './shared/components/side-section/side-section.component';
-import { MainSectionComponent } from './features/main-section/main-section.component';
+import { DashBoardSectionComponent } from './features/dashboard-section/dashboard-section.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, FooterComponent, SideSectionComponent, MainSectionComponent],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent, SideSectionComponent, DashBoardSectionComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

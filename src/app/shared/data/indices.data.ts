@@ -25,10 +25,5 @@ export const indicesList: Indices[] = [
       name : 'Bank50',
       changes : -1.66,
       currentValue : 54034.50
-    },
-    {
-      name : 'Bank100',
-      changes : 2.6,
-      currentValue : 54034.50
     }
   ]

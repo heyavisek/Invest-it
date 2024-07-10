@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IndicesService } from '../main-section/services/indices.service';
+import { IndicesService } from '../../shared/services/indices.service';
 import { CommonModule } from '@angular/common';
 import { IndicesLargeBoxComponent } from './components/indices-large-box/indices-large-box.component';
 

@@ -1,7 +1,7 @@
 import { CommonModule, CurrencyPipe, DOCUMENT } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Inject, Input, OnChanges, OnInit, SimpleChange, SimpleChanges, ViewChild, viewChild } from '@angular/core';
 import { Chart } from 'chart.js';
-import { IndicesService } from '../../services/indices.service';
+import { IndicesService } from '../../../../shared/services/indices.service';
 
 @Component({
   selector: 'app-indices-box',
@@ -31,8 +31,8 @@ export class IndicesBoxComponent implements AfterViewInit {
       return
     }
     const ctx = <HTMLCanvasElement> document.getElementById(this.indicesName)
-    // const ctx = this.chartDoc
     const context = ctx.getContext('2d')
+
     let redGradient = context?.createLinearGradient(0, 0, 0, 80)    
     redGradient?.addColorStop(0, 'rgba(255,3,0,0.3)')
     redGradient?.addColorStop(1, 'rgba(255,255,255,0)')
@@ -41,8 +41,10 @@ export class IndicesBoxComponent implements AfterViewInit {
     greenGradient?.addColorStop(0, 'rgba(0,124,77,0.3)');   
     greenGradient?.addColorStop(1, 'rgba(255,255,255,0)')
 
-    this.dataSet = this.indicesService.getWeekData(4)
+    this.dataSet = this.indicesService.getWeekData((Math.ceil(Math.random() * 10)%3)+2)
+    console.log()
     this.borderColor = this.changes > 0 ? '#009855' : '#F00000'
+
     this.chart = new Chart(this.indicesName, {
       type: 'line',
       data: {// values on X-Axis
@@ -52,7 +54,7 @@ export class IndicesBoxComponent implements AfterViewInit {
             label:'',
             data: this.dataSet,
             borderColor: this.borderColor,
-            borderWidth : 1.5,
+            borderWidth : 1.2,
             fill : true,
             backgroundColor: this.changes > 0 ? greenGradient : redGradient,
             tension : 0.5

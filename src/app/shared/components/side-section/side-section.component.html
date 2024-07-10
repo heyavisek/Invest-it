@@ -1,67 +1,110 @@
-<section [ngClass]="!isSidebarExpanded ? 'w-[100px]':'w-[300px]'" class="h-screen bg-white relative shadow-lg top-0 z-10 border-solid border-gray-200 border-r-2">
-    <div class="flex flex-col pt-0 w-full h-full">
-        <div class="header-logo flex flex-col pl-6">
-            <div class='flex flex-row items-center h-[80px]'>
-                <img src="images/logo.svg" alt="logo" class="h-[30px] cursor-pointer" routerLink="dashboard"/>
-                <h1 class="text-[22px] p-4 font-[750] bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent" *ngIf="isSidebarExpanded">Invest IT</h1>
-                <img src="images/arrow-white.svg" alt="logo" (click)="setSideSectionExpanded()" [ngClass]="{'rotate-180' : !isSidebarExpanded}" class="p-2 rounded-full h-[36px] w-[36px] absolute right-0 translate-x-1/2 drop-shadow-lg bg-[#005ECC] cursor-pointer fill-blue-50"/>
-            </div>
-        </div>
-        <hr class="border-solid border-gray-200 border-[1px]"/>
-
-        <div class="side-menu flex flex-col gap-4 p-5 h-full overflow-auto text-gray-600">
-    
-            <div class='flex flex-row border-solid border-[1px] p-2 border-[#005cc6] rounded-lg items-center justify-between'>
-                <div class='flex flex-row gap-3 items-center'>
-                    <img src="images/wallet.svg" alt="logo" class="h-[25px] w-[25px]" />
-                    <div class="flex flex-col text-[14px] gap-1 justify-between" [ngClass]="isSidebarExpanded ? 'visible':'hidden'">
-                        <p class="font-[600] text-gray-600">Wallet</p>
-                        <p class="font-semibold text-gray-950">₹ {{balance | currency:'':''}}</p>
-                    </div>
-                </div>
-                <img src="images/arrow-gray.svg" [ngClass]="isSidebarExpanded ? 'visible':'hidden'"alt="arrow" class="h-[12px] w-[12px] rotate-180"/>
-            </div>
-
-            <p class='text-gray-400 text-[12px] uppercase ml-4 font-[500]' [ngClass]="isSidebarExpanded ? 'visible' : 'hidden'">Main Menu</p>
-            <hr class="border-solid border-gray-200 border-[1px]" [ngClass]="!isSidebarExpanded ? 'visible' : 'hidden'"/>
-            <div class="flex flex-col gap-1">
-                <div *ngFor="let item of sideContainerList">
-                    <a [routerLink]="item.link" (click)="item.content && changeMenuExpanded(item.name)">
-                        <app-menu-box [name]="item.name" [image]="item.icon"  [hasList]="item.content" [isExpanded]="menuExpanded.get(item.name)" [isSidebarExpanded]="isSidebarExpanded"></app-menu-box>
-                    </a>
-
-                    <div *ngIf="item.content">
-                        <div *ngFor="let child of item.content" class="{{menuExpanded.get(item.name) && isSidebarExpanded ? 'block' : 'hidden'}}">
-                            <a [routerLink]="child.link">
-                                <app-menu-box [name]="child.name" [isSidebarExpanded]="isSidebarExpanded" ></app-menu-box>
-                            </a>
-                        </div>
-
-                        <div class="{{menuExpanded.get(item.name) && !isSidebarExpanded ? 'block' : 'hidden'}}" class="absolute w-[200px] flex flex-col gap-2 bg-white z-10 border-solid shadow-md border-gray-300 border-[1px] p-2 rounded-md text-[12px] font-semibold text-gray-600">
-                            <a *ngFor="let child of item.content" [routerLink]="child.link" (click)="item.content && changeMenuExpanded(item.name)">
-                                <div  class="flex flex-col justify-center w-full h-[45px] border-solid border-b-[1px] border-gray-300 p-2 grow rounded-md hover:bg-[#EEF6FF]">
-                                    <p>{{child.name}}</p>
-                                </div>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <p class='text-gray-400 text-[12px] uppercase ml-4 font-[500]' [ngClass]="isSidebarExpanded ? 'visible' : 'hidden'">Support</p>
-            <hr class="border-solid border-gray-200 border-[1px]" [ngClass]="!isSidebarExpanded ? 'visible' : 'hidden'"/>
-            <div class="flex flex-col gap-1">
-                <div *ngFor="let item of supportMenuList">
-                    <a [routerLink]="item.link">
-                        <app-menu-box [name]="item.name" [image]="item.icon" [isSidebarExpanded]="isSidebarExpanded"></app-menu-box>
-                    </a>
-                </div>
-            </div>
-            
-            <hr class="border-solid border-gray-200 border-[1px]"/>
-            <div class=" text-red-500">
-                <app-menu-box name="Logout" image="images/logout.svg" [isSidebarExpanded]="isSidebarExpanded"></app-menu-box>
-            </div>
-        </div>        
+<section
+  class="max-w-max h-screen bg-white relative shadow-lg top-0 z-10 border-solid border-gray-200 border-r-2"
+>
+  <div
+    class="w-[300px]"
+    [@slideInOut]="!isAnimation ? 'collapse' : 'expand'"
+  ></div>
+  <div class="flex flex-col pt-0 w-full h-full">
+    <div class="header-logo flex flex-col pl-6">
+      <div class="flex flex-row items-center h-[80px]">
+        <img
+          src="images/logo.svg"
+          alt="logo"
+          class="h-[30px] cursor-pointer"
+          routerLink="dashboard"
+        />
+        <h1
+          class="p-4 font-[750] bg-gradient-to-r from-blue-500 to-blue-800 bg-clip-text text-transparent"
+          [@hideAnimation]="!isSidebarExpanded ? 'hide' : 'visible'"
+        >
+          Invest IT
+        </h1>
+        <img
+          src="images/arrow-white.svg"
+          alt="logo"
+          (click)="setSideSectionExpanded()"
+          [ngClass]="{ 'rotate-180': !isSidebarExpanded }"
+          class="p-2 rounded-full h-[36px] w-[36px] absolute right-0 translate-x-1/2 drop-shadow-lg bg-[#005ECC] cursor-pointer fill-blue-50"
+        />
+      </div>
     </div>
+    <hr class="border-solid border-gray-200 border-[1px]" />
+
+    <div
+      class="side-menu flex flex-col gap-4 p-5 h-full overflow-auto text-gray-600"
+    >
+      <div
+        class="flex flex-row border-solid border-[1px] p-2 border-[#005cc6] rounded-lg items-center justify-between"
+      >
+        <div class="flex flex-row gap-3 items-center">
+          <img src="images/wallet.svg" alt="logo" class="h-[25px] w-[25px]" />
+          <div
+            class="flex flex-col text-[14px] gap-1 justify-between"
+            [@hideAnimation]="!isSidebarExpanded ? 'hide' : 'visible'"
+          >
+            <p class="font-[600] text-gray-600">Wallet</p>
+            <p class="font-semibold text-gray-950">
+              ₹ {{ balance | currency : "" : "" }}
+            </p>
+          </div>
+        </div>
+        <img
+          src="images/arrow-gray.svg"
+          [@hideAnimation]="!isSidebarExpanded ? 'hide' : 'visible'"
+          alt="arrow"
+          class="h-[12px] w-[12px] rotate-180"
+        />
+      </div>
+
+      <p
+        class="text-gray-400 text-[12px] uppercase ml-4 font-[500]"
+        [@hideAnimation]="!isSidebarExpanded ? 'hide' : 'visible'"
+      >
+        Main Menu
+      </p>
+      <hr
+        class="border-solid border-gray-200 border-[1px]"
+        [@hideAnimation]="isSidebarExpanded ? 'hide' : 'visible'"
+      />
+      <div class="flex flex-col gap-1">
+        <div *ngFor="let item of sideContainerList">
+          <app-menu-box
+            [menuItem]="item"
+            [isSidebarExpanded]="isSidebarExpanded"
+          ></app-menu-box>
+        </div>
+      </div>
+
+      <p
+        class="text-gray-400 text-[12px] uppercase ml-4 font-[500]"
+        [@hideAnimation]="!isSidebarExpanded ? 'hide' : 'visible'"
+      >
+        Support
+      </p>
+      <hr
+        class="border-solid border-gray-200 border-[1px]"
+        [@hideAnimation]="isSidebarExpanded ? 'hide' : 'visible'"
+      />
+      <div class="flex flex-col gap-1">
+        <div *ngFor="let item of supportMenuList">
+          <app-menu-box
+            [menuItem]="item"
+            [isSidebarExpanded]="isSidebarExpanded"
+          ></app-menu-box>
+        </div>
+      </div>
+
+      <hr
+        class="border-solid border-gray-200 border-[1px]"
+        [@hideAnimation]="isSidebarExpanded ? 'hide' : 'visible'"
+      />
+      <div class="text-red-500">
+        <app-menu-box
+          [menuItem]="logOutMenu"
+          [isSidebarExpanded]="isSidebarExpanded"
+        ></app-menu-box>
+      </div>
+    </div>
+  </div>
 </section>

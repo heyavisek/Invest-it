@@ -1,4 +1,6 @@
-export const sideMenuList: any = [
+import { MenuLink } from "../models/munu.link.model"
+
+export const sideMenuList: MenuLink[] = [
   {
       name: 'Home',
       icon: 'images/home.svg',
@@ -62,11 +64,11 @@ export const sideMenuList: any = [
   }
 ]
 
-export const supportMenuList:any = [
+export const supportMenuList: MenuLink[] = [
   {
       name: 'Settings',
       icon: 'images/settings.svg',
-      link: 'settings',
+      link: 'settings'
   },
   {
       name: 'FAQs',
@@ -74,3 +76,9 @@ export const supportMenuList:any = [
       link: 'faqs',
   }
 ]
+
+export const logOutMenu: MenuLink={
+    name: "Logout",
+    icon: 'images/logout.svg',
+    link: 'logout'
+}

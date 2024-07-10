@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import {Chart} from 'chart.js/auto'
-import { IndicesService } from '../main-section/services/indices.service';
+import { IndicesService } from '../../shared/services/indices.service';
 
 @Component({
   selector: 'app-portfolio-section',

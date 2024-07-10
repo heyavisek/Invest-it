@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { indicesList } from '../../../shared/data/indices.data';
-import { Indices } from '../../../shared/models/indices.model';
+import { indicesList } from '../data/indices.data';
+import { Indices } from '../models/indices.model';
 
 @Injectable({
   providedIn: 'root'
