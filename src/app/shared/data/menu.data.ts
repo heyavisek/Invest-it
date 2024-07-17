@@ -17,7 +17,8 @@ export const sideMenuList: MenuLink[] = [
   },
   {
       name : 'Watchlist',
-      icon : 'images/home.svg'
+      icon : 'images/home.svg',
+      link : 'watchlists'
   },
   {
       name: 'Portfolio',

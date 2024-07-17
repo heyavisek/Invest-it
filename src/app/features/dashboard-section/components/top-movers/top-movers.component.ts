@@ -24,7 +24,7 @@ export class TopMoversComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
     setTimeout(() => {
-      const data = this.stocksService.getTopMovers().subscribe((response) => {
+      const data = this.stocksService.getTopMoversListStocks().subscribe((response) => {
         const data: JSON = JSON.parse(JSON.stringify(response));
         this.data = data;
         this.topMovers = this.data.top_gainers;

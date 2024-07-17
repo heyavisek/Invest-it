@@ -34,7 +34,7 @@ export const HideAnimation = trigger('hideAnimation', [
     })
   ),
   transition('hide => visible', [animate('400ms  ease-in-out')]),
-  transition('visible => hide', [animate('200ms  ease-in-out')]),
+  transition('visible => hide', [animate('100ms  ease-in-out')]),
 
   transition('collapse => expand', [animate('2000ms ease-in-out')]),
   transition('expand => collapse', [animate('2000ms ease-in-out')]),

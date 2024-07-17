@@ -1,9 +1,14 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  OnChanges,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { StocksService } from '../../services/stocks.service';
 import { StockSearchItem } from '../../models/stock.search.item.model';
-import { response } from 'express';
 
 @Component({
   selector: 'app-header',
@@ -12,32 +17,40 @@ import { response } from 'express';
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss',
 })
+
 export class HeaderComponent {
   inputData: string = '';
-  data: StockSearchItem[] = []
+  data: StockSearchItem[] = [];
   searchResult: StockSearchItem[] = [];
+  isFocusedInInput: boolean = false;
+  isLoaded: boolean = false;
+  setTime: any;
 
   constructor(private stocksService: StocksService) {}
 
   onSearchTextChange(): void {
-    
-    if (this.inputData.length > 0 ) {
-      // if (this.inputData.length > 1){
-      //   this.searchResult = this.data.filter((item: StockSearchItem) => {
-      //     return item["1. symbol"].toLowerCase().includes(this.inputData.toLowerCase()) || item["2. name"].toLowerCase().includes(this.inputData.toLowerCase());
-      //   });
-      // }else{
-      //   this.stocksService.searchStocksList(this.inputData).subscribe((response)=>{
-      //     this.data = response.bestMatches
-      //     this.searchResult = this.data
-      //   })
-      // }
-      this.stocksService.searchStocksList(this.inputData).subscribe((response)=>{
-        this.data = response.bestMatches
-        this.searchResult = this.data
-      })
-    } else {
-      this.searchResult = [];
-    }
+
+    window.clearTimeout(this.setTime);
+
+    this.setTime = setTimeout(() => {
+      this.isLoaded = false
+
+      this.stocksService
+        .searchStocksList(this.inputData ?? '')
+        .subscribe((response) => {
+          this.data = response.bestMatches;
+          this.isLoaded = true;
+          if (this.data) {
+            this.searchResult = this.data;
+          } else {
+            this.searchResult = [];
+          }
+        });
+    }, 500);
   }
+
+  hasFocusedInInput(isFocus: boolean) {
+    this.isFocusedInInput = isFocus;
+  }
+  
 }

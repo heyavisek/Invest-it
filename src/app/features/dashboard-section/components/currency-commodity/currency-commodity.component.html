@@ -1,20 +1,6 @@
-<section class="flex flex-col shadow-lg rounded-md pb-5 bg-white w-full">
-  <div class="flex flex-row gap-2 mt-5 mb-3 mr-3 ml-3">
-    <app-selector-button
-      name="Send Message"
-      class="cursor-pointer"
-      [isSelected]="isMessageSent"
-      (click)="sendMessage()"
-    ></app-selector-button>
-    <app-selector-button
-      name="Disconnect"
-      class="cursor-pointer"
-      (click)="disconnect()"
-    ></app-selector-button>
-  </div>
-
+<section class="flex flex-col shadow-lg rounded-md pb-2 bg-white w-full">
   <div
-    class="grid grid-flow-col grid-cols-4 pl-4 pr-4 pt-3 pb-3 font-semibold bg-[#f9fafb] border-solid border-t-[1px] border-gray-300 text-gray-600 text-[12px]"
+    class="grid grid-flow-col grid-cols-4 pl-4 pr-4 pt-3 pb-3 rounded-t-md font-semibold bg-[#f9fafb] border-solid border-b-[1px] border-gray-300 text-gray-600 text-[12px]"
   >
     <p class="col-span-3">Stock</p>
     <p class="col-span-1 text-center">Current Price</p>
@@ -24,12 +10,12 @@
     class="flex flex-col h-[410px] overflow-auto scroll-smooth"
   >
     <div
-      *ngFor="let item of message"
+      *ngFor="let item of newValue"
       [ngClass]="'flex flex-row justify-between'"
-      class="font-semibold text-[14px] h-[100px] items-center pl-4 pr-4 pt-2 pb-2 bg-white border-solid border-t-[1px] border-gray-300"
+      class="font-semibold text-[14px] items-center pl-4 pr-4 pt-2 pb-2 bg-white border-solid border-b-[1px] border-gray-300"
     >
-      <p class="col-span-1 text-center">{{ item.symbol }}</p>
-      <p class="col-span-1 text-center">{{ item.value }}</p>
+      <p class="col-span-1 text-center">{{ item.ticker }}</p>
+      <p class="col-span-1 text-center">{{ item.price | number : ".0-3" }}</p>
     </div>
   </div>
 </section>

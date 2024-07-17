@@ -13,7 +13,7 @@
         id="indices-container"
         class="flex flex-row gap-7 items-center overflow-hidden"
       >
-        <div *ngFor="let item of indicesList; let i = index">
+        <div *ngFor="let item of indicesList">
           <app-indices-box
             [indicesName]="item.name"
             [changes]="item.changes"
