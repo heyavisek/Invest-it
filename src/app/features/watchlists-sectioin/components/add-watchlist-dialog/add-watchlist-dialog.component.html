@@ -1,10 +1,37 @@
-<div class="bg-red-300 text-3xl">
-  <h1>helo man i am here</h1>
-  <input
-    class="bg-gray-100 placeholder-gray-500 font-[400] outline-none p-2 pl-10 rounded-lg w-[386px] h-[45px]"
-    type="text"
-    placeholder="Search for stock & more"
-    [(ngModel)]="newWatchList.name"
-    [ngModelOptions]="{ standalone: true }"
-  />
+<div class="text-3xl rounded-2xl min-h-max p-5">
+  <p class="text-[18px]">Add to watchlist</p>
+  <div class="flex flex-col text-[14px]">
+    <form
+      class="flex flex-row justify-between h-[45px] items-center rounded-md p-2"
+    >
+      <input
+        class="outline-none p-2 grow bg-transparent"
+        type="text"
+        placeholder="Create new watchlist"
+        [(ngModel)]="newWatchListName"
+        [ngModelOptions]="{ standalone: true }"
+      />
+      <img
+        [ngClass]="
+          newWatchListName.length > 0 ? 'cursor-pointer' : 'cursor-not-allowed'
+        "
+        class="h-[15px] w-[15px]"
+        src="images/tick-icon.svg"
+        alt="search icon"
+        (click)="addnewWatchList()"
+      />
+    </form>
+    <div
+      *ngFor="let item of newWatchList"
+      (click)="addToWatchList(item.id)"
+      class="flex flex-row justify-between h-[45px] items-center p-2 rounded-md hover:bg-blue-800 hover:bg-opacity-15 cursor-pointer"
+    >
+      <p>{{ item.name }}</p>
+      <img
+        class="h-[15px] w-[15px]"
+        src="images/plus-icon.svg"
+        alt="search icon"
+      />
+    </div>
+  </div>
 </div>

@@ -1,63 +1,70 @@
-<section class="flex flex-col shadow-lg rounded-md pb-2 bg-white w-full">
-  <p
-    [ngClass]="
-      selectedStocksList.length > 0
-        ? 'text-red-500 cursor-pointer'
-        : 'text-red-100 cursor-not-allowed'
-    "
-    class="max-w-max font-semibold pl-7 pr-4 pt-3 pb-4"
-  >
-    Remove
-  </p>
-  <div
-    class="flex flex-row items-center justify-center pl-6 pr-4 pt-3 pb-3 font-semibold border-solid bg-[#f9fafb] border-t-[1px] border-gray-300 text-gray-500 text-[13px]"
-  >
-    <input
-      class="bg-black w-[18px] h-[18px] rounded-full mr-10"
-      type="checkbox"
-    />
-    <div class="grid grid-flow-col grid-cols-4 grow">
-      <p class="col-span-1">Stocks</p>
-      <p class="col-span-1">Sector</p>
-      <p class="col-span-1">Change</p>
-      <p class="col-span-1">Current Price</p>
+<section class="flex flex-col w-full">
+  <div class="flex flex-col shadow-lg rounded-md bg-white">
+    <p
+      [ngClass]="
+        selectedStocksList.includes(true)
+          ? 'text-red-500 cursor-pointer'
+          : 'text-red-100 cursor-not-allowed'
+      "
+      class="max-w-max font-semibold pl-7 pr-4 pt-3 pb-4"
+    >
+      Remove
+    </p>
+    <div
+      class="flex flex-row items-center justify-center pl-6 pr-4 pt-3 pb-3 font-semibold border-solid bg-[#f9fafb] border-t-[1px] border-gray-300 text-gray-500 text-[13px]"
+    >
+      <input
+        class="bg-black w-[18px] h-[18px] rounded-full mr-10"
+        type="checkbox"
+        (click)="selectAllBox($event)"
+        [disabled]="stocksList.length < 1"
+      />
+      <div class="grid grid-flow-col grid-cols-4 grow">
+        <p class="col-span-1">Stocks</p>
+        <p class="col-span-1">Sector</p>
+        <p class="col-span-1">Change</p>
+        <p class="col-span-1">Current Price</p>
+      </div>
     </div>
-  </div>
 
-  <div>
-    <div *ngFor="let stockItem of stocksList">
-      <div
-        class="flex flex-row items-center justify-center h-[70px] pl-6 pr-4 pt-3 pb-3 font-semibold border-solid border-t-[1px] border-gray-300 text-gray-900"
-      >
-        <input
-          class="bg-black w-[18px] h-[18px] rounded-full mr-10"
-          type="checkbox"
-        />
-        <div class="grid grid-flow-col grid-cols-4 grow">
-          <p class="col-span-1">Stocks</p>
-          <p class="col-span-1 text-[12px]">Sector</p>
+    <div class="max-h-[calc(100vh-330px)] overflow-y-auto">
+      <div *ngFor="let stockItem of stocksList; index as i">
+        <div
+          class="flex flex-row items-center justify-center h-[70px] pl-6 pr-4 pt-3 pb-3 font-semibold border-solid border-t-[1px] border-gray-300 text-gray-900"
+        >
+          <input
+            class="bg-black w-[18px] h-[18px] rounded-full mr-10"
+            type="checkbox"
+            [checked]="selectedStocksList[i]"
+            (click)="onCheckBoxClick(i)"
+          />
 
-          <div class="flex flex-row gap-3">
-            <div class="flex flex-row items-center justify-center col-span-1">
-              <p *ngIf="change > 0">+</p>
-              <p>{{ change }}</p>
-            </div>
-            <div
-              class="text-[11px] font-bold flex max-w-max p-[2px] pr-2 pl-1 flex-row justify-center items-center rounded-full gap-1"
-              [ngClass]="
-                change < 0
-                  ? 'bg-[#fef3f2] text-[#cc0400]'
-                  : 'bg-[#e9fef2] text-[#00794a]'
-              "
-            >
-              <div class="flex flex-row items-center justify-center">
+          <div class="grid grid-flow-col grid-cols-4 grow">
+            <p class="col-span-1">{{ stockItem.ticker }}</p>
+            <p class="col-span-1 text-[12px]">Sector</p>
+
+            <div class="flex flex-row gap-3">
+              <div class="flex flex-row items-center justify-center col-span-1">
                 <p *ngIf="change > 0">+</p>
-                <p>{{ change }}%</p>
+                <p>{{ change }}</p>
+              </div>
+              <div
+                class="text-[11px] font-bold flex max-w-max p-[2px] pr-2 pl-1 flex-row justify-center items-center rounded-full gap-1"
+                [ngClass]="
+                  change < 0
+                    ? 'bg-[#fef3f2] text-[#cc0400]'
+                    : 'bg-[#e9fef2] text-[#00794a]'
+                "
+              >
+                <div class="flex flex-row items-center justify-center">
+                  <p *ngIf="change > 0">+</p>
+                  <p>{{ change }}%</p>
+                </div>
               </div>
             </div>
-          </div>
 
-          <p class="col-span-1">{{ change }}</p>
+            <p class="col-span-1">{{ stockItem.price | number : ".0-2" }}</p>
+          </div>
         </div>
       </div>
     </div>

@@ -25,7 +25,7 @@ export class CurrencyCommodityComponent
   implements OnInit, AfterViewChecked, OnDestroy
 {
   message: any = [];
-  messageLength: number = 10;
+  messageLength: number = 20;
   dataMap: Map<string, string> = new Map();
   newValue: Stocks[] = [];
 

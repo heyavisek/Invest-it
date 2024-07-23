@@ -1,7 +1,7 @@
 <nav
   class="flex flex-row relative h-[80px] justify-between pl-10 pr-10 shadow-md items-center bg-white text-black"
 >
-  <div class="relative">
+  <div class="relative" id="searchContainer">
     <form>
       <input
         class="bg-gray-100 placeholder-gray-500 font-[400] outline-none p-2 pl-10 rounded-lg w-[386px] h-[45px]"
@@ -38,10 +38,16 @@
         </div>
         <div *ngIf="searchResult.length > 0">
           <div
-            *ngFor="let item of searchResult"
+            *ngFor="let item of searchResult; index as i"
             class="flex flex-row w-full gap-x-2 h-[45px] border-solid border-b-[1px] border-gray-300 p-2 items-center"
           >
-            <input type="checkbox" class="w-4 h-4" checked />
+            <p
+              class="flex justify-center items-center border-[1px] border-solid h-4 w-4 rounded-sm border-gray-600 text-[12px] cursor-pointer"
+              (click)="openAddToWatchlist(i)"
+            >
+              +
+            </p>
+
             <div class="grid grid-cols-3 grow">
               <p class="grid col-span-1">{{ item["1. symbol"] }}</p>
               <p class="h-auto overflow-hidden col-span-2 text-end">

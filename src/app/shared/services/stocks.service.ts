@@ -51,6 +51,7 @@ export class StocksService {
 
   searchStocksList(keyword: string): Observable<any>{
     keyword = 'tencent'
-    return this.http.get(`${environment.baseUrl}${environment.searchStockURL}&keywords=${keyword}&${environment.apiKey}`)
+    const URI = `${environment.baseUrl}${environment.searchStockURL}&keywords=${keyword}&${environment.apiKey}`
+    return this.http.get(URI)
   }
 }

@@ -11,6 +11,7 @@ import { IndicesService } from '../../shared/services/indices.service';
   styleUrl: './portfolio-section.component.scss'
 })
 export class PortfolioSectionComponent implements OnInit {
+  array : number[]= [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
   public chart: any;
   indicesData : number[] = []
   constructor(private indicesService : IndicesService){}
@@ -61,6 +62,10 @@ export class PortfolioSectionComponent implements OnInit {
       }
       
     });
+  }
+
+  printValue(value : number){
+    console.log(this.array.length, value)
   }
 
 }
