@@ -1,4 +1,12 @@
-import { AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  AfterContentChecked,
+  AfterViewInit,
+  Component,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  SimpleChanges,
+} from '@angular/core';
 import { WatchListTab } from '../../shared/models/watchlist.tabs.model';
 import { WatchlistService } from '../../shared/services/watchlist.service';
 import { CommonModule } from '@angular/common';
@@ -7,6 +15,7 @@ import { StockWatchlistComponent } from './components/stock-watchlist/stock-watc
 import { AddWatchlistDialogComponent } from './components/add-watchlist-dialog/add-watchlist-dialog.component';
 import { FormsModule } from '@angular/forms';
 import { RealtimeWebsocketService } from '../../shared/services/realtime.websocket.service';
+import { listWatchList } from '../../shared/data/list.watchlist.data';
 
 @Component({
   selector: 'app-watchlists-sectioin',
@@ -21,13 +30,16 @@ import { RealtimeWebsocketService } from '../../shared/services/realtime.websock
   templateUrl: './watchlists-sectioin.component.html',
   styleUrl: './watchlists-sectioin.component.scss',
 })
-export class WatchlistsSectioinComponent implements OnInit, OnDestroy {
+export class WatchlistsSectioinComponent
+  implements OnInit, OnDestroy
+{
   selectedTab: number = 2;
   isWatchListEdit: boolean = false;
   watchListName: string = '';
   stockDataMap: Map<string, string> = new Map();
   newValue: any = [];
   change: number = 3.5;
+  watchListMessage : any = listWatchList
 
   watchListTab: WatchListTab[] = this.watchListService.getWatchListTab();
 
@@ -36,10 +48,11 @@ export class WatchlistsSectioinComponent implements OnInit, OnDestroy {
     private websocketService: RealtimeWebsocketService
   ) {}
 
+
   ngOnInit(): void {
     this.websocketService.connect().subscribe({
       next: (res) => {
-        if (res.success) {
+        if (res.success && res.subscribe) {
           const symbol = res.subscribe.split(':')[1];
           this.stockDataMap.set(symbol, '0');
           this.newValue = Array.from(this.stockDataMap, ([key, value]) => ({
@@ -64,16 +77,29 @@ export class WatchlistsSectioinComponent implements OnInit, OnDestroy {
 
     this.websocketService.sendMessage({
       op: 'subscribe',
-      args: ['trade:.BMYROT', 'trade:.BALTMEXT', 'trade:XBTUSD'],
+      args: this.watchListMessage[this.selectedTab]
     });
   }
 
+
   setTabSelected(id?: number) {
+    this.websocketService.sendMessage({
+      op: 'unsubscribe',
+      args: this.watchListMessage[this.selectedTab],
+    });
+
     this.selectedTab = id ?? 0;
+    this.stockDataMap.clear()
+
+    
+    this.websocketService.sendMessage({
+      op: 'subscribe',
+      args: this.watchListMessage[this.selectedTab],
+    });
   }
 
   openAddWatchList() {
-    if (this.watchListTab.length < 7) {
+    if (this.watchListTab.length < 7 && this.watchListName.length) {
       this.watchListTab.push({
         id: this.watchListTab.length,
         name: `${this.watchListName}`,

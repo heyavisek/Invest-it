@@ -1,12 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { webSocket, WebSocketSubject } from 'rxjs/webSocket';
+import { listWatchList } from '../data/list.watchlist.data';
 const WS_ENDPOINT = 'wss://ws.bitmex.com/realtime';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RealtimeWebsocketService {
+  watchlistMessage = listWatchList
   private subject: WebSocketSubject<any>;
   constructor() {
     if (typeof global !== 'undefined') {
@@ -19,7 +21,7 @@ export class RealtimeWebsocketService {
     return this.subject.asObservable()
   }
 
-  public sendMessage(message: any) {
+  sendMessage(message : any) {
     return this.subject.next(message);
   }
 

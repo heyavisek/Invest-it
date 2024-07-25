@@ -12,6 +12,8 @@ import { StocksService } from '../../services/stocks.service';
 import { StockSearchItem } from '../../models/stock.search.item.model';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { AddWatchlistDialogComponent } from '../../../features/watchlists-sectioin/components/add-watchlist-dialog/add-watchlist-dialog.component';
+import { RealtimeWebsocketService } from '../../services/realtime.websocket.service';
+import { listWatchList } from '../../data/list.watchlist.data';
 
 @Component({
   selector: 'app-header',
@@ -28,7 +30,7 @@ export class HeaderComponent {
   isLoaded: boolean = false;
   setTime: any;
 
-  constructor(private stocksService: StocksService, private dialog: MatDialog) {
+  constructor(private stocksService: StocksService, private dialog: MatDialog, private websocketService : RealtimeWebsocketService) {
     if (typeof window !== 'undefined') {
       window.addEventListener('click', (e: any) => {
         if (!document.getElementById('searchContainer')?.contains(e.target)) {
@@ -68,7 +70,7 @@ export class HeaderComponent {
     });
 
     dialogRef.afterClosed().subscribe(() => {
-      console.log('after closed.');
+      this.websocketService.sendMessage(listWatchList[0]);
     });
   }
 }

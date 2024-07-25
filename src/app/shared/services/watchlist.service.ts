@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { watchListTabData } from '../data/watchlist.data';
+import { watchListTabData } from '../data/watchlist.tab.data';
 import { WatchListTab } from '../models/watchlist.tabs.model';
 
 @Injectable({
@@ -11,4 +11,5 @@ export class WatchlistService {
   getWatchListTab(): WatchListTab[] {
     return watchListTabData
   }
+  
 }

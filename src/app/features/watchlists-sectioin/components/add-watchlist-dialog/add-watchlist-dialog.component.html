@@ -18,12 +18,12 @@
         class="h-[15px] w-[15px]"
         src="images/tick-icon.svg"
         alt="search icon"
-        (click)="addnewWatchList()"
+        (click)="addNewWatchList()"
       />
     </form>
     <div
       *ngFor="let item of newWatchList"
-      (click)="addToWatchList(item.id)"
+      (click)="addStockToWatchList(item.id)"
       class="flex flex-row justify-between h-[45px] items-center p-2 rounded-md hover:bg-blue-800 hover:bg-opacity-15 cursor-pointer"
     >
       <p>{{ item.name }}</p>
